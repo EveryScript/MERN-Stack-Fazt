@@ -1,0 +1,4 @@
+#Backend Ignore
+frontend
+node_modules
+backend/avatars
