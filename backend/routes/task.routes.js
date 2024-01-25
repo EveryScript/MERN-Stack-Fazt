@@ -17,7 +17,7 @@ userRouter.get('/users', getUsers)
 userRouter.get('/user/:id', getUser)
 userRouter.post('/user', createUser)
 userRouter.put('/user/:id', updateUser)
-userRouter.put('/status/:id', updateStatus)
+userRouter.put('/status/:id', updateStatus) 
 userRouter.delete('/user/:id', deleteUser)
 
 userRouter.post('/login', signIn)
