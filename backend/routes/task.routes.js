@@ -1,26 +1,13 @@
-import { Router } from "express"
-import { createUser, deleteUser, getUser, getUsers, updateUser, signIn, uploadAvatar, updateStatus } from "../controllers/user.controllers.js";
-import multer from "multer"; // https://github.com/expressjs/multer/blob/master/doc/README-es.md
-const upload = multer({
-    limits: { fileSize: 1000000 }, // 1MB
-    fileFilter: (req, file, cb) => { // Middleware validation
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-            cb(null, true);
-        } else {
-            cb(null, false);
-        }
-    }
-});
+import { Router } from "express";
+import { pool } from "../db.js";
+import { createTask, deleteTask, getTask, getTaskByUser, getTasks, updateTask } from "../controllers/task.controller.js";
 
-const userRouter = Router();
-userRouter.get('/users', getUsers)
-userRouter.get('/user/:id', getUser)
-userRouter.post('/user', createUser)
-userRouter.put('/user/:id', updateUser)
-userRouter.put('/status/:id', updateStatus) 
-userRouter.delete('/user/:id', deleteUser)
+const taskRouter = Router()
+taskRouter.get('/api/tasks', getTasks)
+taskRouter.get('/api/tasks/:id', getTask)
+taskRouter.get('/api/tasks/user/:id', getTaskByUser)
+taskRouter.post('/api/tasks', createTask)
+taskRouter.put('/api/tasks/:id', updateTask)
+taskRouter.delete('/api/tasks/:id', deleteTask)
 
-userRouter.post('/login', signIn)
-userRouter.post('/avatar/:id', upload.single('avatar'), uploadAvatar)
-
-export default userRouter;
+export default taskRouter
